@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import HeroSection from '../../components/HeroSection/HeroSection';
 import LoginCardSection from '../../components/LoginCardSection/LoginCardSection';
+import LoginOfferSection from '../../components/LoginOfferSection/LoginOfferSection';
 
 
 
@@ -21,7 +22,7 @@ const LoginPage = () => (
       <Header headerItems={headerItems} buttonName={buttonName} />
       <HeroSection />
       <LoginCardSection />
-      <div className="loginPage__offer-section">offer section</div>
+      <LoginOfferSection />
       <div className="loginPage__footer">Footer</div>    
     </div>
   
