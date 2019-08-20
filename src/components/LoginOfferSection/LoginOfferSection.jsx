@@ -63,6 +63,8 @@ const cards = [{
     imgSrc: perksImg
 }
 ];
+
+
 const LoginOfferSection = (props) => {
 
     const classes = useStyles();
