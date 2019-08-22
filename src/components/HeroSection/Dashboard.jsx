@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import RecentTransactions from './RecentTransactions';
+import StatementBalance from './StatementBalance';
 
 
 
@@ -9,11 +10,11 @@ const useStyles = makeStyles(theme => ({
 
     section: {
         backgroundColor: `#ededed`,
-        padding: theme.spacing(3, 0, 6),
-        marginTop: theme.spacing(3),
-        [theme.breakpoints.up('md')]: {
-            marginTop: theme.spacing(6),
-        } 
+        // padding: theme.spacing(3, 0, 6),
+        // marginTop: theme.spacing(3),
+        // [theme.breakpoints.up('md')]: {
+        //     marginTop: theme.spacing(6),
+        // } 
       },
       cardGrid: {
         paddingTop: theme.spacing(6),
@@ -58,6 +59,7 @@ const Dashboard = (props) => {
         
       <section className={classes.section}>
         <Container className={classes.cardGrid} maxWidth="lg" align='center'>
+          <StatementBalance />
           <RecentTransactions />
         </Container>
       </section>

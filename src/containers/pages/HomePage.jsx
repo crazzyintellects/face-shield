@@ -7,6 +7,7 @@ import Drawer from '../../components/Drawer/DrawerFixed'
 import Camera from '../../components/VerifyFace/Camera';
 import {getFaceMatcher} from '../../utilities/faceMaster';
 import {secureHomePage}  from '../../utilities/faceMaster';
+import Dashboard from '../../components/HeroSection/Dashboard';
 
 const headerItems = [
   'Home',
@@ -31,19 +32,19 @@ class HomePage extends Component {
     let videoPlayer = document.querySelector('#player');
     let canvasElement = document.querySelector('#canvas');
 
-    setTimeout(
-      async () => {
-       let userFacesData = JSON.parse(localStorage.getItem("userFacesData")) || [];
-       let faceUserName = userFacesData[0].user;
-       await getFaceMatcher(userFacesData);
+    // setTimeout(
+    //   async () => {
+    //    let userFacesData = JSON.parse(localStorage.getItem("userFacesData")) || [];
+    //    let faceUserName = userFacesData[0].user;
+    //    await getFaceMatcher(userFacesData);
        
-       this.setState({
-        faceUserName: faceUserName,
-       });
-       await secureHomePage(videoPlayer,canvasElement,faceUserName);
+    //    this.setState({
+    //     faceUserName: faceUserName,
+    //    });
+    //    await secureHomePage(videoPlayer,canvasElement,faceUserName);
 
 
-    },800);
+    // },800);
 
 }
 
@@ -59,8 +60,7 @@ render ()
       <Header headerItems={headerItems} buttonName={buttonName} />
       <Drawer />
       <Camera />
-      <StatementBalance />
-      <RecentTransactions />
+      <Dashboard />
       <Footer />    
     </div>
   )

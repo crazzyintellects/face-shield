@@ -18,23 +18,23 @@ const useStyles = makeStyles(theme => ({
 
     section: {
         backgroundColor: `#ededed`,
-        padding: theme.spacing(3, 0, 6),
-        marginTop: theme.spacing(3),
-        [theme.breakpoints.up('md')]: {
-            marginTop: theme.spacing(6),
-        } 
+        // padding: theme.spacing(3, 0, 6),
+        // marginTop: theme.spacing(3),
+        // [theme.breakpoints.up('md')]: {
+        //     marginTop: theme.spacing(6),
+        // } 
       },
       cardGrid: {
         paddingTop: theme.spacing(6),
-        paddingBottom: theme.spacing(6),
-        // paddingLeft: theme.spacing(6),
-        // paddingRight: theme.spacing(6),
+        paddingBottom: theme.spacing(1),
+        paddingLeft: theme.spacing(12),
+        paddingRight: theme.spacing(12),
         // marginLeft: theme.spacing(6),
         // marginRight: theme.spacing(6),
       },
       card: {
         height: '100%',
-        width: '75%',
+        width: '95%',
         display: 'flex',
         flexDirection: 'column',
         paddingLeft: '5%',
@@ -89,9 +89,6 @@ const StatementBalance = (props) => {
     return (
         
           <section className={classes.section}>
-            <Typography component="h2" variant="h4" align="center" color="textPrimary" gutterBottom>
-               {/* Latest Offers and Updates */}
-            </Typography>
             <Container className={classes.cardGrid} maxWidth="lg" align='center'>
                 <Grid container spacing={20}>
                 {/* {cards.map(card => ( */}
@@ -128,7 +125,7 @@ const StatementBalance = (props) => {
                         variant="contained"
                         color="primary"
                         >
-                        Balance & Credit Details
+                        Balance &amp; Credit Details
                       </Button>
                     </CardActions>
                     <Typography variant="subtitle2" align='center' style={{cursor: 'pointer'}} color="primary">
