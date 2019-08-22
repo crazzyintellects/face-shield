@@ -17,7 +17,7 @@ const headerItems = [
 
 const buttonName = 'Log out';
 
-class LoginPage extends Component {
+class TwoFactorAuthPage extends Component {
 
   state = {
     showVerifyPage :false,
@@ -67,5 +67,5 @@ componentDidMount = () => {
 
  
   
-  export default LoginPage;
+  export default TwoFactorAuthPage;
   

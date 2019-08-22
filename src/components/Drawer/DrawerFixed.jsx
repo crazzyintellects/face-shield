@@ -82,6 +82,7 @@ export default function PersistentDrawerLeft() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const selectedControls = [];
 
     function handleDrawerOpen() {
         setOpen(true);
@@ -90,8 +91,14 @@ export default function PersistentDrawerLeft() {
     function handleDrawerClose() {
         setOpen(false);
     }
-    function SelectControls(){
+    function SelectControls(controlEvent){
+        if(controlEvent.target.checked)
+        {
+            selectedControls.push(controlEvent.target.value);
 
+        }else {
+            selectedControls.pop(controlEvent.target.value);
+        }
     }
 
     return (
@@ -140,10 +147,10 @@ export default function PersistentDrawerLeft() {
                 <List>
                     {['Remaining Statement Balance', 'Payment Due', 'Total Balance', 'Recent Transactions'].map((text, index) => (
                         <ListItem button key={text}>
-                            {index === 0 &&  <ListItemIcon><Checkbox color={"primary"} id={`StatementBalance`} /><MonetizationOnIcon style={{height:`40px`}} /> </ListItemIcon>}
-                            {index === 1 && <ListItemIcon><Checkbox color={"primary"} id={`PayDue`} /><AccessTimeIcon style={{height:`40px`}}/> </ListItemIcon>}
-                            {index === 2 && <ListItemIcon><Checkbox color={"primary"} id={`TotalBalance`} /><MonetizationOnIcon style={{height:`40px`}}/> </ListItemIcon>}
-                            {index === 3 && <ListItemIcon><Checkbox color={"primary"} id={`RecentTxr`} /><ReceiptIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 0 &&  <ListItemIcon><Checkbox  value="StatementBalance" color={"primary"} id={`StatementBalance`} /><MonetizationOnIcon style={{height:`40px`}} /> </ListItemIcon>}
+                            {index === 1 && <ListItemIcon><Checkbox value="PaymentDue"  color={"primary"} id={`PayDue`} /><AccessTimeIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 2 && <ListItemIcon><Checkbox value="TotalBalance"  color={"primary"} id={`TotalBalance`} /><MonetizationOnIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 3 && <ListItemIcon><Checkbox value="RecentTransactions"  color={"primary"} id={`RecentTxr`} /><ReceiptIcon style={{height:`40px`}}/> </ListItemIcon>}
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
