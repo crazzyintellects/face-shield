@@ -37,10 +37,10 @@ const useStyles = makeStyles(theme => ({
         width: '75%',
         display: 'flex',
         flexDirection: 'column',
-        // paddingLeft: theme.spacing(0),
-        // paddingRight: theme.spacing(0),
-        marginLeft: theme.spacing(0),
-        marginRight: theme.spacing(0),
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        // marginLeft: theme.spacing(10),
+        // marginRight: theme.spacing(10),
       },
       cardMedia: {
         paddingTop: '56.25%', // 16:9
@@ -93,31 +93,31 @@ const StatementBalance = (props) => {
                {/* Latest Offers and Updates */}
             </Typography>
             <Container className={classes.cardGrid} maxWidth="lg" align='center'>
-                <Grid container spacing={1}>
-                {cards.map(card => (
-                    <Grid item key={card.id} xs={12} sm={6} md={4}>
+                <Grid container spacing={20}>
+                {/* {cards.map(card => ( */}
+                    <Grid item xs={12} sm={6} md={4}>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
                             <Typography variant="subtitle1" align='center' >
-                                <Box fontWeight="fontWeightBold" m={1} fontSize="14px">
+                                <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
                                     Remaining Statement Balance
                                 </Box>
                                 <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="24px">
-                                     ${card.price}
+                                     ${4566.44}
                                 </Box>
                                 <ColoredLine color="#C0C0C0" />
                                 <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
                                 Available Credit
                                 </Box>
                                 <Box fontWeight="fontWeightLight" m={1} fontSize="14px">
-                                ${11585.00}  Check Spending Power
+                                ${11585.44}  Check Spending Power
                                 </Box>
                                 <ColoredLine color="#C0C0C0" />
                                 <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
                                 Total Balance
                                 </Box>
                                 <Box fontWeight="fontWeightBold" m={1} fontSize="24px">
-                                ${card.price}
+                                ${3465.55}
                                 </Box>
                             </Typography>
                         </CardContent>
@@ -136,8 +136,78 @@ const StatementBalance = (props) => {
                      </Typography>           
                     </Card>
                     </Grid>
-                ))}
+                    <Grid item xs={12} sm={6} md={4}>
+                    <Card className={classes.card}>
+                        <CardContent className={classes.cardContent}>
+                            <Typography variant="subtitle1" align='center' >
+                                <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                                    Your Payment is Due on
+                                </Box>
+                                <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="24px">
+                                     August 29
+                                </Box>
+                                <ColoredLine color="#C0C0C0" />
+                                <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                                Minimum Payment Due
+                                </Box>
+                                <Box fontWeight="fontWeightLight" m={1} fontSize="14px">
+                                ${11585.45}
+                                </Box>
+                                <ColoredLine color="#C0C0C0" />
+                            </Typography>
+                        </CardContent>
+                        <CardActions  className={classes.cardAction}>
+                        <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        >
+                        Make Payment
+                      </Button>
+                    </CardActions>
+                    <Typography variant="subtitle2" align='center' style={{cursor: 'pointer'}} color="primary">
+                            Billing Statements
+                     </Typography>           
+                    </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                    <Card className={classes.card}>
+                        <CardContent className={classes.cardContent}>
+                            <Typography variant="subtitle1" align='center' >
+                                <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                                    Membership Rewards Points
+                                </Box>
+                                <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="14px">
+                                     20% Extra Points Benefit
+                                </Box>
+                                <ColoredLine color="#C0C0C0" />
+                                <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                                Available Points
+                                </Box>
+                                <Box fontWeight="fontWeightLight" m={1} fontSize="14px">
+                                12249
+                                </Box>
+                                <ColoredLine color="#C0C0C0" />
+                            </Typography>
+                        </CardContent>
+                        <CardActions  className={classes.cardAction}>
+                        <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        >
+                        Redeem Points
+                      </Button>
+                    </CardActions>
+                    <Box m={1} align='center' fontSize="14px">
+                            Updates approx. 12pm ET each day.
+                     </Box>           
+                    </Card>
+                    </Grid>
                 </Grid> 
+                
           </Container>
           </section>
        
