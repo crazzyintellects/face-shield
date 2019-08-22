@@ -24,9 +24,12 @@ const useStyles = makeStyles(theme => ({
       cardGrid: {
         paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(6),
+        paddingLeft: theme.spacing(12),
+        paddingRight: theme.spacing(12),
       },
       row: {
         display: 'flex',
+        
       },
       title: {
         marginLeft: theme.spacing(0),
@@ -49,6 +52,7 @@ const useStyles = makeStyles(theme => ({
       },
       cardContent: {
         flexGrow: 1,
+        padding: '10px !important'
       },
       cardAction: {
           paddingBottom: theme.spacing(1),
@@ -79,11 +83,11 @@ const RecentTransactions = (props) => {
 
     <Container className={pageStyles.cardGrid} maxWidth="lg" align='center'>
       <Grid container spacing={1} >
-        <Grid item xs={12} sm={7} md={7}>
+        <Grid item xs={12} sm={8} md={8}>
           <Card className={pageStyles.title}>
             <CardContent className={pageStyles.cardContent}>
               <div className={pageStyles.row} >
-                <Typography variant="h5" align='left' style={{paddingRight: '10px', marginTop: '5px'}}>
+                <Typography variant="h5" align='left' style={{paddingLeft: '10px', paddingRight: '10px', marginTop: '5px'}}>
                     Recent Transactions
                 </Typography>
                 <Typography variant="subtitle1" align='left' style={{ marginTop: '10px'}} >
@@ -91,7 +95,7 @@ const RecentTransactions = (props) => {
                 </Typography>
                 <Typography 
                   variant="subtitle1" align='right' color="primary"
-                  style={{ width: '34%', float: 'right', cursor: 'pointer', marginTop: '10px'}}>
+                  style={{ width: '30%', float: 'right', cursor: 'pointer', marginTop: '10px'}}>
                     View All
                 </Typography>       
               </div>
