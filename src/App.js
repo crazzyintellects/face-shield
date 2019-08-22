@@ -6,7 +6,7 @@ import TwoFactorAuthPage from './containers/pages/TwoFactorAuthPage';
 import HomePage from './containers/pages/HomePage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {Switch , Route} from 'react-router-dom';
-
+import './utilities/faceMaster';
 
 const theme = createMuiTheme({
   palette: {

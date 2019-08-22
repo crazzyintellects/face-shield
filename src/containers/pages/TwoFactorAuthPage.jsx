@@ -4,7 +4,7 @@ import CaptureFace from '../../components/VerifyFace/CaptureFace';
 import Footer from '../../components/Footer/Footer';
 import Divider from '@material-ui/core/Divider';
 import  '../../utilities/faceMaster';
-import loadFaceModels from '../../utilities/faceMaster'
+//import loadFaceModels from '../../utilities/faceMaster';
 
 
 
@@ -21,9 +21,9 @@ class LoginPage extends Component {
   // useEffect(() => {
   //   loadFaceModels();
   // });
-componentDidMount = () => {
-  loadFaceModels();
-}
+// componentDidMount = () => {
+//   loadFaceModels();
+// }
   
   render () {
 

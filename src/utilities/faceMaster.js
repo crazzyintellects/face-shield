@@ -1,5 +1,5 @@
 import * as faceapi from 'face-api.js';
-//import $ from "jquery";
+import $ from "jquery";
 
 const MODEL_URL = '/model';
 
@@ -20,16 +20,20 @@ const loadFaceModels = async () => {
 
 
 
-// $( document ).ready(function() {
-//     loadFaceModels().then(result => {
-//         // this parse may fail
-//         const data = JSON.parse(result)
-//         console.log(data)
-//       })
-//       //  handle asynchronous errors
-//        .catch((err) => {
-//          console.log(err)
-//        })
-// });
+
+
+$( document ).ready(function() {
+    // loadFaceModels().then(result => {
+    //     // this parse may fail
+    //     const data = JSON.parse(result);
+    //     console.log(data);
+    //   })
+    //   //  handle asynchronous errors
+    //    .catch((err) => {
+    //      console.log(err);
+    //    })
+    loadFaceModels();
+
+});
 
 export default loadFaceModels;

@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import * as faceapi from 'face-api.js'
 import storeDataLocal from '../../utilities/storeLocal';
 
+
 const useStyles = makeStyles(theme => ({
     
     cardGrid: {
@@ -201,10 +202,10 @@ const CaptureFace = (props) => {
                         </div>
                       </Slide>
                      
-                      <Grid container id="playerDiv" className={`${classes.hide} ${classes.cardAction}`} justify="center" alignItems="center">
+                      <Grid container id="playerDiv" className={`${classes.hide} ${classes.cardAction}`} justify="center" alignItems="center" allow="geolocation; camera ; microphone">
                      
-                      <Grid item > <video id="player" autoPlay width="320" height="247"></video> </Grid>
-                      <Grid item > <canvas id="canvas" width="320" height="247" className={classes.hide}></canvas> </Grid>
+                      <Grid item > <video id="player" autoPlay width="320" height="247"  allow="autoplay; geolocation; camera ; microphone"></video> </Grid>
+                      <Grid item > <canvas id="canvas" width="320" height="247" className={classes.hide}  allow="geolocation; camera ; microphone"></canvas> </Grid>
                       
                       </Grid>
 
