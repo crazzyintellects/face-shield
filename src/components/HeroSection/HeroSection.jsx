@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import { withRouter } from 'react-router-dom';
+
 
 const useStyles = makeStyles(theme => ({
 
@@ -118,6 +120,7 @@ const HeroSection = (props) => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={() => props.history.push(`/twoFactorAuth`)}
                       >
                         Log In
                       </Button>
@@ -159,4 +162,4 @@ const HeroSection = (props) => {
 
 };
 
-export default HeroSection;
+export default withRouter(HeroSection);
