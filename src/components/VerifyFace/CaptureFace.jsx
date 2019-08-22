@@ -10,11 +10,13 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Wizard from './Wizard';
 import Slide from '@material-ui/core/Slide';
+import  initializeMedia from '../../utilities/camera';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
     
     cardGrid: {
-        paddingTop: theme.spacing(6),
+        //paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(6),
      
         
@@ -42,20 +44,72 @@ const useStyles = makeStyles(theme => ({
       },
       cardAction: {
         justifyContent: `center`,
-    }
+    },
+    hide: {
+        display: 'none',
+        overflow: 'hidden'
+      },
+
 
 }));
+
+let photosArray =[];
+let index = 0;
+
 
 const CaptureFace = (props) => {
 
     const classes = useStyles();
     const [checked, setChecked] = React.useState(true);
+    const [showSaveBtn, setShowSaveBtn] = React.useState(false);
+    
     const getStartedBtnClick = (event) => {
         setChecked(false);
 
+        let videoPlayer = document.querySelector('#player');
+        let playerDiv = document.querySelector('#playerDiv');
+        let canvasElement = document.querySelector('#canvas');
 
+        initializeMedia(playerDiv,videoPlayer,canvasElement);
     };
 
+     const captureImage = () => {
+      
+        index = index + 1;
+        
+        let faceImageShown = '#faceImage' + index;
+        
+        let videoPlayer = document.querySelector('#player');
+        let playerDiv = document.querySelector('#playerDiv');
+        let canvasElement = document.querySelector('#canvas');
+        //canvasElement.style.display = 'block';
+
+        let faceImage = document.querySelector(faceImageShown);
+        let imageGallery = document.querySelector('#imageGallery');
+       
+        let context = canvasElement.getContext('2d');
+        context.drawImage(videoPlayer, 0, 0, 320, 247);
+       
+        faceImage.src = canvasElement.toDataURL('image/jpeg');
+        canvasElement.style.display =' none';
+        imageGallery.style.display = 'flex';
+        
+        //push photos in array
+        photosArray.push(faceImage);
+        faceImage.style.display = 'block';
+
+        if(index === 3) {
+            playerDiv.style.display ='none';
+            document.querySelector('#takePicture').style.display = 'none';
+            setShowSaveBtn(true);
+            videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
+                track.stop();
+        });
+          
+
+        }
+    
+      }
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">
@@ -88,6 +142,24 @@ const CaptureFace = (props) => {
                             </Typography>
                         </div>
                       </Slide>
+                     
+                      <Grid container id="playerDiv" className={`${classes.hide} ${classes.cardAction}`} justify="center" alignItems="center">
+                     
+                      <Grid item > <video id="player" autoPlay width="320" height="247"></video> </Grid>
+                      <Grid item > <canvas id="canvas" width="320" height="247" className={classes.hide}></canvas> </Grid>
+                      
+                      </Grid>
+
+                
+                      <Grid container spacing={1} id="imageGallery" className={classes.hide} justify="center"
+                      alignItems="center" >
+                      <Grid item xs={12} sm={6} md={4}> <img id="faceImage1" src="" alt="UserImage" className={`${classes.pad2} ${classes.hide}`}/> </Grid>
+                      <Grid item xs={12} sm={6} md={4}> <img id="faceImage2" src="" alt="UserImage" className={`${classes.pad2} ${classes.hide}`} /> </Grid>
+                      <Grid item xs={12} sm={6} md={4}> <img id="faceImage3" src="" alt="UserImage" className={classes.hide} /> </Grid>
+                      </Grid>
+                     
+
+
                     </CardContent>
                     <CardActions  className={classes.cardAction}>
                     <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
@@ -105,15 +177,39 @@ const CaptureFace = (props) => {
                         type="submit"   
                         variant="contained"
                         color="primary"
+                        onClick={captureImage}
+                        id="takePicture"
                         >
                         Take Picture
                     </Button>
                     </Slide>   
+
+                            <Slide direction="right" in={showSaveBtn} mountOnEnter unmountOnExit>
+                            <TextField
+                            id="username"
+                            label="Name"
+                          
+                        
+                            margin="normal"
+                            variant="outlined"
+                            />
+                            </Slide>
+                        
+                            <Slide direction="down" in={showSaveBtn} mountOnEnter unmountOnExit>
+                            <Button
+                                type="submit"   
+                                variant="contained"
+                                color="primary"
+                                id="savePictures"
+                                >
+                                Save Pictures
+                            </Button>
+                            </Slide>  
+                      
                 </CardActions>
                 </Card>
                </Grid>
-           </Grid>
-       
+           </Grid>  
         </Container>
 
     )
