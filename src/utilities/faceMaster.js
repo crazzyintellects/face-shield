@@ -33,7 +33,7 @@ $( document ).ready(function() {
 //get face matcher 
 export const getFaceMatcher = async (userfaces) => {
     const labeledDescriptors = [];
-    let descriptors = userfaces[0].descriptors.map(desc => {
+    let descriptors = userfaces[0].descriptor.map(desc => {
        
         if(desc.descriptor) {
              let descArray = [];
