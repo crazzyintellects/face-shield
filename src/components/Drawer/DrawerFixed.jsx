@@ -90,7 +90,7 @@ export default function PersistentDrawerLeft() {
     function handleDrawerClose() {
         setOpen(false);
     }
-    functionSelectControls(){
+    function SelectControls(){
 
     }
 
