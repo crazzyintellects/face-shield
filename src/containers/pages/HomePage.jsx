@@ -25,6 +25,7 @@ class HomePage extends Component {
 
   state = {
     faceUserName : "",
+      classesToBeBlurred:[]
   };
 
   componentDidMount = () => {
@@ -49,7 +50,17 @@ class HomePage extends Component {
 }
 
 
+getSelectedClassesToBeBlurred=(event)=>{
+   const classesToBeBlurred = [...this.state.classesToBeBlurred];
+    if(event.target.checked)
+    {
+        classesToBeBlurred.push(event.target.value);
 
+    }else {
+        classesToBeBlurred.pop(event.target.value);
+    }
+    this.setState({classesToBeBlurred})
+}
 
 
 render ()
@@ -58,7 +69,7 @@ render ()
   return (
     <div className="homepage">
       <Header headerItems={headerItems} buttonName={buttonName} />
-      <Drawer />
+      <Drawer getSelectedClassesToBeBlurred={this.getSelectedClassesToBeBlurred} />
       <Camera />
       <Dashboard />
       <Footer />    
