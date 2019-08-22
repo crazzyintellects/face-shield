@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
       },
       card: {
         height: '100%',
-        width: '95%',
+        width: '98%',
         display: 'flex',
         flexDirection: 'column',
         paddingLeft: '5%',
@@ -71,7 +71,7 @@ const StatementBalance = (props) => {
         
           <section className={classes.section}>
             <Container className={classes.cardGrid} maxWidth="lg" align='center'>
-                <Grid container spacing={10}>
+              <Grid container spacing={1}>
                 {/* {cards.map(card => ( */}
                     <Grid item xs={12} sm={6} md={4}>
                     <Card className={classes.card}>
@@ -109,7 +109,8 @@ const StatementBalance = (props) => {
                         Balance &amp; Credit Details
                       </Button>
                     </CardActions>
-                    <Typography variant="subtitle2" align='center' style={{cursor: 'pointer'}} color="primary">
+                    <Typography variant="subtitle2" align='center' 
+                      style={{cursor: 'pointer', paddingBottom: '15px'}} color="primary">
                             Plan It: Create / View Plans
                      </Typography>           
                     </Card>
@@ -144,7 +145,8 @@ const StatementBalance = (props) => {
                         Make Payment
                       </Button>
                     </CardActions>
-                    <Typography variant="subtitle2" align='center' style={{cursor: 'pointer'}} color="primary">
+                    <Typography variant="subtitle2" align='center' 
+                        style={{cursor: 'pointer', paddingBottom: '15px'}} color="primary">
                             Billing Statements
                      </Typography>           
                     </Card>
@@ -179,9 +181,10 @@ const StatementBalance = (props) => {
                         Redeem Points
                       </Button>
                     </CardActions>
-                    <Box m={1} align='center' fontSize="14px">
+                    <Typography variant="subtitle2" align='center' 
+                        style={{cursor: 'pointer', paddingBottom: '15px'}} color="black">
                             Updates approx. 12pm ET each day.
-                     </Box>           
+                     </Typography>         
                     </Card>
                     </Grid>
                 </Grid> 
