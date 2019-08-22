@@ -9,7 +9,7 @@ import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import logoImg from '../../logo.svg';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
      appbar: {
@@ -92,7 +92,9 @@ const useStyles = makeStyles(theme => ({
                     <IconButton color="primary">
                     <SearchIcon />
                     </IconButton>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary"
+                     onClick={() => props.history.push(`/`)}
+                    >
                       {props.buttonName}
                     </Button>
                 </Toolbar>
@@ -104,5 +106,5 @@ const useStyles = makeStyles(theme => ({
     )
   }; 
   
-  export default Header;
+  export default withRouter(Header);
   
