@@ -1,8 +1,6 @@
 import React , {Component} from 'react';
 import Header from '../../components/Header/Header';
-import StatementBalance from '../../components/HeroSection/StatementBalance';
 import Footer from '../../components/Footer/Footer';
-import RecentTransactions from '../../components/HeroSection/RecentTransactions';
 import Drawer from '../../components/Drawer/DrawerFixed'
 import Camera from '../../components/VerifyFace/Camera';
 import {getFaceMatcher} from '../../utilities/faceMaster';

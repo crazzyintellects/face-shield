@@ -7,9 +7,6 @@ import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
-import rewardsImg from '../../assets/rewards.webp';
-import perksImg from '../../assets/perks.webp';
-import cameraImg from '../../assets/camera.webp';
 import Box from '@material-ui/core/Box';
 
 
@@ -27,8 +24,8 @@ const useStyles = makeStyles(theme => ({
       cardGrid: {
         paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(1),
-        paddingLeft: theme.spacing(12),
-        paddingRight: theme.spacing(12),
+        paddingLeft: theme.spacing(10),
+        paddingRight: theme.spacing(10),
         // marginLeft: theme.spacing(6),
         // marginRight: theme.spacing(6),
       },
@@ -56,21 +53,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const cards = [{
-    id : 1,
-    imgSrc: cameraImg,
-    price: '979.56',
-},
-{
-    id : 2,
-    imgSrc: rewardsImg
-},
-{
-    id : 3,
-    imgSrc: perksImg
-}
-];
-
 const ColoredLine = ({ color }) => (
     <hr
         style={{
@@ -82,9 +64,8 @@ const ColoredLine = ({ color }) => (
 );
 
 const StatementBalance = (props) => {
-    // const [spacing, setSpacing] = React.useState(2);
+   
     const classes = useStyles();
-
 
     return (
         

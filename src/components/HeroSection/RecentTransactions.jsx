@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
         width: '99%',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(6),
-        paddingLeft: theme.spacing(12),
-        paddingRight: theme.spacing(12),
+        paddingLeft: theme.spacing(10),
+        paddingRight: theme.spacing(10),
       },
       row: {
         display: 'flex',
@@ -110,8 +110,8 @@ const RecentTransactions = (props) => {
               {tranData.length > 0 &&
               <Table className={pageStyles.table}>
                 <TableBody>
-                  {tranData.map(row => (
-                    <TableRow key={0}>
+                  {tranData.map((row,idx) => (
+                    <TableRow key={idx}>
                       <TableCell component="th" scope="row">
                         {row.date}
                       </TableCell>
