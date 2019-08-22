@@ -93,7 +93,23 @@ const useStyles = makeStyles(theme => ({
                     <SearchIcon />
                     </IconButton>
                     <Button variant="contained" color="primary"
-                     onClick={() => props.history.push(`/`)}
+                     onClick={() => 
+                      {
+                        props.history.push(`/`);
+
+                        let videoPlayer = document.querySelector('#player');
+                        if(videoPlayer && videoPlayer.srcObject.getVideoTracks().length > 0) {
+                          videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
+                            track.stop();
+                          });
+                            
+                        }
+                         
+                       
+                     }
+                            
+
+                    }
                     >
                       {props.buttonName}
                     </Button>

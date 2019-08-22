@@ -16,7 +16,7 @@ import storeDataLocal from '../../utilities/storeLocal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
 import { withRouter } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 
 

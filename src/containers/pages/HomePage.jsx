@@ -31,19 +31,19 @@ class HomePage extends Component {
     let videoPlayer = document.querySelector('#player');
     let canvasElement = document.querySelector('#canvas');
 
-    // setTimeout(
-    //   async () => {
-    //    let userFacesData = JSON.parse(localStorage.getItem("userFacesData")) || [];
-    //    let faceUserName = userFacesData[0].user;
-    //    await getFaceMatcher(userFacesData);
+    setTimeout(
+      async () => {
+       let userFacesData = JSON.parse(localStorage.getItem("userFacesData")) || [];
+       let faceUserName = userFacesData[0].user;
+       await getFaceMatcher(userFacesData);
        
-    //    this.setState({
-    //     faceUserName: faceUserName,
-    //    });
-    //    await secureHomePage(videoPlayer,canvasElement,faceUserName);
+       this.setState({
+        faceUserName: faceUserName,
+       });
+       await secureHomePage(videoPlayer,canvasElement,faceUserName);
 
 
-    // },800);
+    },800);
 
 }
 
