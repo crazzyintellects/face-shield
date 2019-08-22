@@ -4,6 +4,7 @@ import CaptureFace from '../../components/VerifyFace/CaptureFace';
 import Footer from '../../components/Footer/Footer';
 import Divider from '@material-ui/core/Divider';
 import  '../../utilities/faceMaster';
+import VerifyFace from '../../components/VerifyFace/VerifyFace';
 //import loadFaceModels from '../../utilities/faceMaster';
 
 
@@ -17,6 +18,11 @@ const headerItems = [
 const buttonName = 'Log out';
 
 class LoginPage extends Component {
+
+  state = {
+    showVerifyPage :false,
+  };
+
   
   // useEffect(() => {
   //   loadFaceModels();
@@ -25,13 +31,30 @@ class LoginPage extends Component {
 //   loadFaceModels();
 // }
   
+componentDidMount = () => {
+  
+     if(typeof(Storage) !== undefined){
+       if(localStorage.userDataStored){
+        this.setState({
+          showVerifyPage: true,
+        });
+   
+       }
+     }
+
+}
+
+
   render () {
 
     return (
  
     <div className="twoFactorAuthPage">
       <Header headerItems={headerItems} buttonName={buttonName} />
-      <CaptureFace /> 
+      {
+        this.state.showVerifyPage ? (<VerifyFace />)   : (<CaptureFace /> )
+      }
+      
       <Divider />
       <Footer />    
     </div>
