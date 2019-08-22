@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +16,8 @@ import storeDataLocal from '../../utilities/storeLocal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
 import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -96,9 +97,9 @@ const CaptureFace = (props) => {
 
     const buttonClassname = clsx({
         [classes.buttonSuccess]: success,
-      });
-    
-    
+    });
+
+
     const getStartedBtnClick = (event) => {
         setChecked(false);
 
@@ -106,15 +107,15 @@ const CaptureFace = (props) => {
         let playerDiv = document.querySelector('#playerDiv');
         let canvasElement = document.querySelector('#canvas');
 
-        initializeMedia(playerDiv,videoPlayer,canvasElement);
+        initializeMedia(playerDiv, videoPlayer, canvasElement);
     };
 
-     const captureImage = () => {
-      
+    const captureImage = () => {
+
         index = index + 1;
-        
+
         let faceImageShown = '#faceImage' + index;
-        
+
         let videoPlayer = document.querySelector('#player');
         let playerDiv = document.querySelector('#playerDiv');
         let canvasElement = document.querySelector('#canvas');
@@ -122,80 +123,81 @@ const CaptureFace = (props) => {
 
         let faceImage = document.querySelector(faceImageShown);
         let imageGallery = document.querySelector('#imageGallery');
-       
+
         let context = canvasElement.getContext('2d');
         context.drawImage(videoPlayer, 0, 0, 320, 247);
-       
+
         faceImage.src = canvasElement.toDataURL('image/jpeg');
-        canvasElement.style.display =' none';
+        canvasElement.style.display = ' none';
         imageGallery.style.display = 'flex';
-        
+
         //push photos in array
         photosArray.push(faceImage);
         faceImage.style.display = 'block';
 
-        if(index === 3) {
-            playerDiv.style.display ='none';
+        if (index === 3) {
+            playerDiv.style.display = 'none';
             document.querySelector('#takePicture').style.display = 'none';
             setShowSaveBtn(true);
             videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
                 track.stop();
-        });
-          
+            });
+
 
         }
-    
-      }
 
-      const getFaceDescriptions = async () => {
-          await photosArray.forEach(async (photo) => {
-          
+    }
+
+    const getFaceDescriptions = async () => {
+        await photosArray.forEach(async (photo) => {
+
             let eachFaceDescription = await faceapi.detectSingleFace(photo).withFaceLandmarks().withFaceDescriptor();
-            if(eachFaceDescription){
+            if (eachFaceDescription) {
                 await fullfaceDescriptions.push({
                     descriptor: eachFaceDescription.descriptor
                 });
             }
         });
         return fullfaceDescriptions;
-        
+
     };
-         
+
     const savePicturesFn = async (e) => {
-        e.preventDefault();
-        user = document.getElementById("username").value ;
+        setLoading(true);
 
-        await getFaceDescriptions();
+        setTimeout(
+            async () => {
+                user = document.getElementById("username").value;
 
-        if (!loading) {
-            setSuccess(false);
-            setLoading(true);
+                await getFaceDescriptions();
 
-            setTimeout(
-                async () => {
-                  let imageGallery = document.querySelector('#imageGallery');
-                  imageGallery.style.display = 'none';
-                  setShowSaveBtn(false);
-                  console.log("show success");
-                  setSuccess(true);
-                  setLoading(false);          
-      
-            },2500);
-      
-            setTimeout(
-                 () => {
-                    setshowSuccessMsg(true);
-                    
-            },3000);
+                if (!loading) {
 
-        
-          }
+
+                    let imageGallery = document.querySelector('#imageGallery');
+                    imageGallery.style.display = 'none';
+                    console.log("show success");
+                    setSuccess(true);
+                    setLoading(false);
+                    setShowSaveBtn(false);
+                }
+
+            }, 2000);
+
+        setTimeout(
+            () => {
+                setshowSuccessMsg(true);
+
+            }, 3000);
+
+
+    };
 
      
         
 
 
-    };
+
 
     const redirectToHomePage = async (e) => {
         e.preventDefault();
