@@ -14,6 +14,9 @@ import  initializeMedia from '../../utilities/camera';
 import TextField from '@material-ui/core/TextField';
 import * as faceapi from 'face-api.js'
 import storeDataLocal from '../../utilities/storeLocal';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import clsx from 'clsx';
+import { withRouter } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -53,6 +56,26 @@ const useStyles = makeStyles(theme => ({
         overflow: 'hidden'
       },
 
+      wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+      },
+
+      buttonSuccess: {
+        backgroundColor: `green[500]`,
+        '&:hover': {
+          backgroundColor: `green[700]`,
+        },
+      },
+      buttonProgress: {
+        color: `green[500]`,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+      },
+
 
 }));
 
@@ -68,6 +91,13 @@ const CaptureFace = (props) => {
     const [checked, setChecked] = React.useState(true);
     const [showSaveBtn, setShowSaveBtn] = React.useState(false);
     const [showSuccessMsg, setshowSuccessMsg] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+
+    const buttonClassname = clsx({
+        [classes.buttonSuccess]: success,
+      });
+    
     
     const getStartedBtnClick = (event) => {
         setChecked(false);
@@ -137,16 +167,31 @@ const CaptureFace = (props) => {
 
         await getFaceDescriptions();
 
-      setTimeout(
-          async () => {
-            let imageGallery = document.querySelector('#imageGallery');
-            imageGallery.style.display = 'none';
-            setShowSaveBtn(false);
-            setshowSuccessMsg(true);
-            console.log("show success");
+        if (!loading) {
+            setSuccess(false);
+            setLoading(true);
 
-      },3000)
+            setTimeout(
+                async () => {
+                  let imageGallery = document.querySelector('#imageGallery');
+                  imageGallery.style.display = 'none';
+                  setShowSaveBtn(false);
+                  console.log("show success");
+                  setSuccess(true);
+                  setLoading(false);          
+      
+            },2500);
+      
+            setTimeout(
+                 () => {
+                    setshowSuccessMsg(true);
+                    
+            },3000);
 
+        
+          }
+
+     
         
 
 
@@ -164,6 +209,12 @@ const CaptureFace = (props) => {
         });
     }
     await storeDataLocal(userfaces);
+    setTimeout(
+        () => {
+          
+            props.history.push(`/HomePage`);
+           
+   },500);
 
       
     };
@@ -264,15 +315,20 @@ const CaptureFace = (props) => {
                             </Slide>
                         
                             <Slide direction="down" in={showSaveBtn} mountOnEnter unmountOnExit>
+                            <div className={classes.wrapper}>
                             <Button
                                 type="submit"   
                                 variant="contained"
                                 color="primary"
                                 id="savePictures"
                                 onClick={savePicturesFn}
+                                disabled={loading}
+                                className={buttonClassname}
                                 >
                                 Save Pictures
                             </Button>
+                            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                            </div>
                             </Slide>  
                       
                 </CardActions>
@@ -284,4 +340,4 @@ const CaptureFace = (props) => {
     )
 }; 
 
-export default CaptureFace;
+export default withRouter(CaptureFace);
