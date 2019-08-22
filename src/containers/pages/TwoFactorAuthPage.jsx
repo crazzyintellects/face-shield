@@ -1,8 +1,10 @@
-import React from 'react';
+import React , {Component} from 'react';
 import Header from '../../components/Header/Header';
 import CaptureFace from '../../components/VerifyFace/CaptureFace';
 import Footer from '../../components/Footer/Footer';
 import Divider from '@material-ui/core/Divider';
+import  '../../utilities/faceMaster';
+import loadFaceModels from '../../utilities/faceMaster'
 
 
 
@@ -14,7 +16,18 @@ const headerItems = [
 
 const buttonName = 'Log out';
 
-const LoginPage = () => (
+class LoginPage extends Component {
+  
+  // useEffect(() => {
+  //   loadFaceModels();
+  // });
+componentDidMount = () => {
+  loadFaceModels();
+}
+  
+  render () {
+
+    return (
  
     <div className="twoFactorAuthPage">
       <Header headerItems={headerItems} buttonName={buttonName} />
@@ -22,8 +35,12 @@ const LoginPage = () => (
       <Divider />
       <Footer />    
     </div>
+
+    )
   
-)
+  }
+
+};
 
  
   

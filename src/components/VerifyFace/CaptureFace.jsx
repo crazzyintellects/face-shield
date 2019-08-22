@@ -12,6 +12,8 @@ import Wizard from './Wizard';
 import Slide from '@material-ui/core/Slide';
 import  initializeMedia from '../../utilities/camera';
 import TextField from '@material-ui/core/TextField';
+import * as faceapi from 'face-api.js'
+import storeDataLocal from '../../utilities/storeLocal';
 
 const useStyles = makeStyles(theme => ({
     
@@ -54,6 +56,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 let photosArray =[];
+let fullfaceDescriptions = [];
+let user = "";
 let index = 0;
 
 
@@ -62,6 +66,7 @@ const CaptureFace = (props) => {
     const classes = useStyles();
     const [checked, setChecked] = React.useState(true);
     const [showSaveBtn, setShowSaveBtn] = React.useState(false);
+    const [showSuccessMsg, setshowSuccessMsg] = React.useState(false);
     
     const getStartedBtnClick = (event) => {
         setChecked(false);
@@ -111,6 +116,59 @@ const CaptureFace = (props) => {
     
       }
 
+      const getFaceDescriptions = async () => {
+          await photosArray.forEach(async (photo) => {
+          
+            let eachFaceDescription = await faceapi.detectSingleFace(photo).withFaceLandmarks().withFaceDescriptor();
+            if(eachFaceDescription){
+                await fullfaceDescriptions.push({
+                    descriptor: eachFaceDescription.descriptor
+                });
+            }
+        });
+        return fullfaceDescriptions;
+        
+    };
+         
+    const savePicturesFn = async (e) => {
+        e.preventDefault();
+        user = document.getElementById("username").value ;
+
+        await getFaceDescriptions();
+
+      setTimeout(
+          async () => {
+            let imageGallery = document.querySelector('#imageGallery');
+            imageGallery.style.display = 'none';
+            setShowSaveBtn(false);
+            setshowSuccessMsg(true);
+            console.log("show success");
+
+      },3000)
+
+        
+
+
+    };
+
+    const redirectToHomePage = async (e) => {
+        e.preventDefault();
+
+    let userfaces = [];
+  
+    if(fullfaceDescriptions && fullfaceDescriptions.length > 0){
+        await userfaces.push({
+            user : user,
+            descriptor: fullfaceDescriptions
+        });
+    }
+    await storeDataLocal(userfaces);
+
+      
+    };
+
+
+
     return (
         <Container className={classes.cardGrid} maxWidth="md">
            <Grid container spacing={4}>
@@ -159,6 +217,15 @@ const CaptureFace = (props) => {
                       </Grid>
                      
 
+                      <Slide direction="up" in={showSuccessMsg} mountOnEnter unmountOnExit>
+                      <div onClick={redirectToHomePage}>
+                           <Typography component="h5" variant="h5" align="center"  gutterBottom>
+                             Congrats !
+                           </Typography>
+                          
+                       </div>
+                     </Slide>
+
 
                     </CardContent>
                     <CardActions  className={classes.cardAction}>
@@ -201,6 +268,7 @@ const CaptureFace = (props) => {
                                 variant="contained"
                                 color="primary"
                                 id="savePictures"
+                                onClick={savePicturesFn}
                                 >
                                 Save Pictures
                             </Button>
