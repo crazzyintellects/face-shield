@@ -71,7 +71,7 @@ const StatementBalance = (props) => {
         
           <section className={classes.section}>
             <Container className={classes.cardGrid} maxWidth="lg" align='center'>
-                <Grid container spacing={20}>
+                <Grid container spacing={10}>
                 {/* {cards.map(card => ( */}
                     <Grid item xs={12} sm={6} md={4}>
                     <Card className={classes.card}>
