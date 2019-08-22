@@ -9,6 +9,9 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Box from "@material-ui/core/Box";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,6 +68,15 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
+const ColoredLine = ({ color }) => (
+    <hr
+        style={{
+          color: color,
+          backgroundColor: color,
+          height: 1
+        }}
+    />
+);
 
 const tranData = [
   {date: 'Aug 21', status: 'Pending', merchant: 'AMEX SLC', amount: '$3.51'},
@@ -74,10 +86,10 @@ const tranData = [
   {date: 'Aug 10', status: '', merchant: 'BEST BUY', amount: '$879.09'},
 ]
 
-
 const RecentTransactions = (props) => {
   
   const pageStyles = useStyles();
+  const classes = useStyles();
 
 
   return (
@@ -129,7 +141,49 @@ const RecentTransactions = (props) => {
             </Typography>           
           </Card>
         </Grid>
-      </Grid> 
+
+      <Grid item xs={12} sm={4} md={4}>
+        <Card className={classes.card}>
+          <CardContent className={classes.cardContent}>
+            <Typography variant="subtitle1" align='center' >
+              <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                Links
+              </Box>
+              <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="24px">
+                <a href="#" >Try out this cool new feature</a>
+              </Box>
+              <ColoredLine color="#C0C0C0" />
+              <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                <a href="#" >BLA</a>
+              </Box>
+              <Box fontWeight="fontWeightLight" m={1} fontSize="14px">
+                <a href="#" >Try out this cool new feature</a>
+              </Box>
+              <ColoredLine color="#C0C0C0" />
+              <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
+                <a href="#" >Try out this cool new feature</a>
+              </Box>
+              <Box fontWeight="fontWeightBold" m={1} fontSize="24px">
+                <a href="#" >Try out this cool new feature</a>
+              </Box>
+            </Typography>
+          </CardContent>
+          <CardActions  className={classes.cardAction}>
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+            >
+              Balance & Credit Details
+            </Button>
+          </CardActions>
+          <Typography variant="subtitle2" align='center' style={{cursor: 'pointer'}} color="primary">
+            Plan It: Create / View Plans
+          </Typography>
+        </Card>
+      </Grid>
+      </Grid>
     </Container>
        
   )
