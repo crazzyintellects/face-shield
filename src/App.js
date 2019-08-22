@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import './App.css';
 import LoginPage from './containers/pages/LoginPage';
 import TwoFactorAuthPage from './containers/pages/TwoFactorAuthPage';
+import HomePage from './containers/pages/HomePage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {Switch , Route} from 'react-router-dom';
 
@@ -33,6 +34,7 @@ function App() {
        <Switch>
          <Route exact path="/" component={LoginPage} />
          <Route path="/twoFactorAuth" component={TwoFactorAuthPage} />
+         <Route path="/HomePage" component={HomePage} />
         </Switch> 
       </MuiThemeProvider>
       </ CssBaseline>
