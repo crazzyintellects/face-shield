@@ -2,7 +2,9 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './App.css';
 import LoginPage from './containers/pages/LoginPage';
+import TwoFactorAuthPage from './containers/pages/TwoFactorAuthPage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {Switch , Route} from 'react-router-dom';
 
 
 const theme = createMuiTheme({
@@ -17,7 +19,7 @@ const theme = createMuiTheme({
       light: '#f2f2f2',
       main: '#fff',
       dark: '#ccc',
-      contrastText: '#006fcf',
+      contrastText: '#1769aa',
     },
   },
 });
@@ -28,7 +30,10 @@ function App() {
     <React.Fragment>
       <CssBaseline >
       <MuiThemeProvider theme={theme}>  
-        <LoginPage />  
+       <Switch>
+         <Route exact path="/" component={LoginPage} />
+         <Route path="/twoFactorAuth" component={TwoFactorAuthPage} />
+        </Switch> 
       </MuiThemeProvider>
       </ CssBaseline>
      </React.Fragment>
