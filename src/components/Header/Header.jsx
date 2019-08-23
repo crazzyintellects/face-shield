@@ -95,15 +95,9 @@ const useStyles = makeStyles(theme => ({
                     <Button variant="contained" color="primary"
                      onClick={() => 
                       {
-                        props.history.push(`/`);
+                       // props.history.push(`/`);
 
-                        let videoPlayer = document.querySelector('#player');
-                        if(videoPlayer && videoPlayer.srcObject.getVideoTracks().length > 0) {
-                          videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
-                            track.stop();
-                          });
-                            
-                        }
+                        props.logout(props);
                          
                        
                      }
