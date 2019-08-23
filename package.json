@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-sw": "http-server -p process.env.PORT || 5000 ./build"
+    "start-sw": "http-server ./build"
   },
   "eslintConfig": {
     "extends": "react-app"
