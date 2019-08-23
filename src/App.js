@@ -7,6 +7,7 @@ import HomePage from './containers/pages/HomePage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {Switch , Route} from 'react-router-dom';
 import './utilities/faceMaster';
+import './utilities/voiceControl';
 
 const theme = createMuiTheme({
   palette: {
