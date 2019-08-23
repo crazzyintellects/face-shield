@@ -119,7 +119,7 @@ const RecentTransactions = (props) => {
 
     <Container className={pageStyles.cardGrid} maxWidth="lg" align='center'>
       <Grid container spacing={2} >
-        <Grid item xs={12} sm={8} md={8}>
+        <Grid item xs={12} sm={8} md={8} classname="RecentTransactions">
           <Card className={pageStyles.title}>
             <CardContent className={pageStyles.cardContent}>
               <div className={pageStyles.row} >

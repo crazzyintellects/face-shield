@@ -80,7 +80,7 @@ const StatementBalance = (props) => {
                                 <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
                                     Remaining Statement Balance
                                 </Box>
-                                <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="24px">
+                                <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="24px" className="StatementBalance">
                                      ${4566.44}
                                 </Box>
                                 <ColoredLine color="#C0C0C0" />
@@ -94,7 +94,7 @@ const StatementBalance = (props) => {
                                 <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
                                 Total Balance
                                 </Box>
-                                <Box fontWeight="fontWeightBold" m={1} fontSize="24px">
+                                <Box fontWeight="fontWeightBold" m={1} fontSize="24px" className="TotalBalance">
                                 ${3465.55}
                                 </Box>
                             </Typography>
@@ -129,7 +129,7 @@ const StatementBalance = (props) => {
                                 <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
                                 Minimum Payment Due
                                 </Box>
-                                <Box fontWeight="fontWeightLight" m={1} fontSize="14px">
+                                <Box fontWeight="fontWeightLight" m={1} fontSize="14px" className="PaymentDue">
                                 ${11585.45}
                                 </Box>
                                 <ColoredLine color="#C0C0C0" />

@@ -5,6 +5,7 @@ import Drawer from '../../components/Drawer/DrawerFixed'
 import Camera from '../../components/VerifyFace/Camera';
 import {getFaceMatcher} from '../../utilities/faceMaster';
 import {secureHomePage}  from '../../utilities/faceMaster';
+import {blurSpecificfields}  from '../../utilities/faceMaster';
 import Dashboard from '../../components/HeroSection/Dashboard';
 import $ from "jquery";
 
@@ -85,7 +86,18 @@ getSelectedClassesToBeBlurred=(event)=>{
     }else {
         classesToBeBlurred.pop(event.target.value);
     }
-    this.setState({classesToBeBlurred})
+    this.setState({classesToBeBlurred});
+
+
+    // making dynamic blur
+   // $('html').removeClass('blur-screen');
+  //  let videoPlayer = document.querySelector('#player');
+  //  let canvasElement = document.querySelector('#canvas');
+  //  blurSpecificfields(videoPlayer,canvasElement,this.state.faceUserName,classesToBeBlurred);
+
+   
+
+
 }
 
 
