@@ -63,7 +63,27 @@ const useStyles = makeStyles(theme => ({
       },
       table: {
 
+      },
+      member: {
+        backgroundColor: '#006FCF',
+        minHeight: '100px',
+        marginLeft: '-10px',
+        marginRight: '-10px',
+        padding: '20px',
+        color: '#FFFFFF',
+        
+      },
+      useBtn: {
+        marginTop: '20px',
+        color: '#006FCF',
+        backgroundColor: '#FFFFFF',
+      },
+      links: {
+        color: '#006FCF',
+        padding: '3px',
+        cursor: 'pointer',
       }
+
      
 
 }));
@@ -84,6 +104,9 @@ const tranData = [
   {date: 'Aug 13', status: '', merchant: 'T.J. MAXX', amount: '$49.76'},
   {date: 'Aug 12', status: '', merchant: 'MCDONALDS', amount: '$12.13'},
   {date: 'Aug 10', status: '', merchant: 'BEST BUY', amount: '$879.09'},
+  {date: 'Aug 8', status: '', merchant: 'BEST BUY', amount: '$79.99'},
+  {date: 'Aug 6', status: '', merchant: 'HOME DEPOT', amount: '$27.67'},
+  {date: 'Aug 3', status: '', merchant: 'MAVERICK', amount: '$37.19'},
 ]
 
 const RecentTransactions = (props) => {
@@ -95,7 +118,7 @@ const RecentTransactions = (props) => {
   return (
 
     <Container className={pageStyles.cardGrid} maxWidth="lg" align='center'>
-      <Grid container spacing={1} >
+      <Grid container spacing={2} >
         <Grid item xs={12} sm={8} md={8}>
           <Card className={pageStyles.title}>
             <CardContent className={pageStyles.cardContent}>
@@ -141,48 +164,52 @@ const RecentTransactions = (props) => {
             </Typography>           
           </Card>
         </Grid>
+        <Grid item xs={12} sm={4} md={4} >
+          <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                  <Typography variant="subtitle1" align='center' >
+                      <Box fontWeight="fontWeightBold" m={1} fontSize="16px" align='left'>
+                        Useful Links
+                      </Box>
+                      <Box fontWeight="fontWeightBold" m={1} align='left' fontSize="14px" 
+                        className={pageStyles.member}>
+                        Membership has its benefits.
+                        <Button
+                          type="submit"
+                          fullWidth
+                          variant="contained"
+                          className={pageStyles.useBtn}
+                          >
+                          See Yours
+                        </Button>
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        Free Credit Score &amp; Report
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        Card Member Agreement
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        Add Another User
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        Recommended Cards for You
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        View Lending Options
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        Manage Account Alerts
+                      </Box>
+                      <Box className={pageStyles.links} m={1} align='left' fontSize="16px">
+                        Replace Lost/Damaged Card
+                      </Box>
+                  </Typography>
+              </CardContent>
+          </Card>
+          </Grid>
 
-      <Grid item xs={12} sm={4} md={4}>
-        <Card className={classes.card}>
-          <CardContent className={classes.cardContent}>
-            <Typography variant="subtitle1" align='center' >
-              <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
-                Links
-              </Box>
-              <Box fontWeight="fontWeightBold" m={1} align='center' fontSize="24px">
-                <a href="#" >Try out this cool new feature</a>
-              </Box>
-              <ColoredLine color="#C0C0C0" />
-              <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
-                <a href="#" >BLA</a>
-              </Box>
-              <Box fontWeight="fontWeightLight" m={1} fontSize="14px">
-                <a href="#" >Try out this cool new feature</a>
-              </Box>
-              <ColoredLine color="#C0C0C0" />
-              <Box fontWeight="fontWeightBold" m={1} fontSize="12px">
-                <a href="#" >Try out this cool new feature</a>
-              </Box>
-              <Box fontWeight="fontWeightBold" m={1} fontSize="24px">
-                <a href="#" >Try out this cool new feature</a>
-              </Box>
-            </Typography>
-          </CardContent>
-          <CardActions  className={classes.cardAction}>
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-            >
-              Balance & Credit Details
-            </Button>
-          </CardActions>
-          <Typography variant="subtitle2" align='center' style={{cursor: 'pointer'}} color="primary">
-            Plan It: Create / View Plans
-          </Typography>
-        </Card>
-      </Grid>
+        
       </Grid>
     </Container>
        

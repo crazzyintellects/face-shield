@@ -159,4 +159,87 @@ export const secureHomePage = async (videoPlayer,canvasElement,faceUserName,isLo
 
 
 
-export default { loadFaceModels , getFaceMatcher  , startCamera , secureHomePage } ;
+//verifyLogin 
+export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
+
+  let context = await startCamera(videoPlayer,canvasElement);
+  let scan = document.querySelector('.face-id-wrapper');
+
+  let loginCount = 0;
+  let unknownCount = 0;
+  
+  const scanForVerify = setInterval(async () => {
+
+   context.drawImage(videoPlayer, 0, 0, 320, 247);
+      
+   let allFacesDetection = await faceapi.detectAllFaces(canvasElement).withFaceLandmarks().withFaceDescriptors();
+
+   if(allFacesDetection.length) {
+        
+       scan.classList.add('animate-scan');
+        
+       allFacesDetection.forEach(async item => {
+
+           const bestMatch = await globalFaceMatcher.findBestMatch(item.descriptor);
+           let matchedUser = bestMatch.toString();
+           console.log("matched user : " + matchedUser);
+           
+           //Blur
+            let regUserName = new RegExp(faceUserName, 'g');
+            
+            if(matchedUser.match(/unknown/g)){
+               loginCount = 0;
+               unknownCount++;
+
+               if(unknownCount > 12) {
+                scan.classList.remove('animate-scan');
+                scan.classList.add('scan-error');
+                unknownCount = 0;
+               }
+
+            } else if (matchedUser.match(regUserName) && bestMatch._distance > 0.2) {
+              loginCount++;
+              console.log("loginCount : " + loginCount);
+
+               if(loginCount === 7) {
+                clearInterval(scanForVerify);
+                scan.classList.remove('animate-scan');
+                scan.classList.remove('scan-error');
+                scan.classList.add('scan-success');
+
+                //stop player
+                videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
+                  track.stop();
+                });
+
+                setTimeout(() => {
+                  window.location.href = '/Homepage';
+                },400);
+
+              
+               
+
+               }
+
+            }
+
+
+
+   });
+
+   } else {
+       
+   }
+
+  }, 60/1000);
+  
+ 
+
+};
+
+
+
+
+
+
+export default { loadFaceModels , getFaceMatcher  , startCamera , secureHomePage  , verifyLogin} ;

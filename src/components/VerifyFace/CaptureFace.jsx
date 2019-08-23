@@ -63,13 +63,13 @@ const useStyles = makeStyles(theme => ({
       },
 
       buttonSuccess: {
-        backgroundColor: `green[500]`,
+        backgroundColor: `green`,
         '&:hover': {
-          backgroundColor: `green[700]`,
+          backgroundColor: `green`,
         },
       },
       buttonProgress: {
-        color: `green[500]`,
+        color: `green`,
         position: 'absolute',
         top: '50%',
         left: '50%',
