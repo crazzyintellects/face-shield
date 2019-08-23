@@ -1,1 +1,1 @@
-worker: npm run build && npm run start-sw
+web: npm run build && npm run start-sw
