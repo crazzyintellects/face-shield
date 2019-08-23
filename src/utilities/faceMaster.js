@@ -241,7 +241,7 @@ export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
 
 //Specific area blur
 export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName , classNameList) => {
-
+    let scanInterval;
   console.log("blur specific");
   //clearInterval(secureHomePage(videoPlayer,canvasElement,faceUserName,false).scanForVerify);
   
@@ -249,8 +249,8 @@ export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName 
   let context = await startCamera(videoPlayer,canvasElement);
 
 
-  
-  setInterval(async () => {
+
+    scanInterval= setInterval(async () => {
 
    context.drawImage(videoPlayer, 0, 0, 320, 247);
       
@@ -263,7 +263,7 @@ export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName 
 
         if(classNameList.length) {
           classNameList.forEach( classNm => {
-            $(classNm).addClass('blur-screen');
+            $(`.`+classNm).addClass('blur-screen');
 
           });
         }
@@ -283,7 +283,7 @@ export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName 
               
               if(classNameList.length) {
                 classNameList.forEach( classNm => {
-                  $(classNm).addClass('blur-screen');
+                  $(`.`+classNm).addClass('blur-screen');
       
                 });
               }
@@ -292,7 +292,7 @@ export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName 
              
               if(classNameList.length) {
                 classNameList.forEach( classNm => {
-                  $(classNm).removeClass('blur-screen');
+                  $(`.`+classNm).removeClass('blur-screen');
       
                 });
               }
@@ -306,7 +306,7 @@ export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName 
     
     if(classNameList.length) {
       classNameList.forEach( classNm => {
-        $(`.classNm`).addClass('blur-screen');
+        $(`.`+classNm).addClass('blur-screen');
 
       });
     }
@@ -317,7 +317,7 @@ export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName 
   }, 60/1000);
   
  
-
+return scanInterval;
 };
 
 

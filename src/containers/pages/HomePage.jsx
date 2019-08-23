@@ -78,23 +78,51 @@ class HomePage extends Component {
     }
 
 getSelectedClassesToBeBlurred=(event)=>{
-   const classesToBeBlurred = [...this.state.classesToBeBlurred];
+   let classesToBeBlurred = [...this.state.classesToBeBlurred];
     if(event.target.checked)
     {
-        classesToBeBlurred.push(event.target.value);
+        if(event.target.value === 'FullPage')
+        {
+            classesToBeBlurred=[];
+            classesToBeBlurred.push(event.target.value);
+        }else {
+            classesToBeBlurred.push(event.target.value);
+        }
 
     }else {
         classesToBeBlurred.pop(event.target.value);
     }
     this.setState({classesToBeBlurred});
 
-
     // making dynamic blur
-   // $('html').removeClass('blur-screen');
-  //  let videoPlayer = document.querySelector('#player');
-  //  let canvasElement = document.querySelector('#canvas');
-  //  blurSpecificfields(videoPlayer,canvasElement,this.state.faceUserName,classesToBeBlurred);
+    if(classesToBeBlurred.includes('FullPage'))
+    {
+        $('html').removeClass('blur-screen');
+        clearInterval(this.state.clearScanTimeout);
+        let videoPlayer = document.querySelector('#player');
+        let canvasElement = document.querySelector('#canvas');
+        let userFacesData = JSON.parse(localStorage.getItem("userFacesData")) || [];
+        let faceUserName = userFacesData[0].user;
 
+        this.setState({
+
+            clearScanTimeout:   secureHomePage(videoPlayer,canvasElement,faceUserName,this.state.isLoggedIn,this.props)
+        });
+    }else {
+
+
+        $('html').removeClass('blur-screen');
+        clearInterval(this.state.clearScanTimeout);
+
+        let videoPlayer = document.querySelector('#player');
+        let canvasElement = document.querySelector('#canvas');
+        this.setState({
+
+            clearScanTimeout: blurSpecificfields(videoPlayer, canvasElement, this.state.faceUserName, classesToBeBlurred)
+        });
+
+
+    }
    
 
 
@@ -107,7 +135,7 @@ render ()
   return (
     <div className="homepage">
       <Header headerItems={headerItems} logout={this.logout} buttonName={buttonName} />
-      <Drawer getSelectedClassesToBeBlurred={this.getSelectedClassesToBeBlurred} />
+      <Drawer selectedClasses={this.state.classesToBeBlurred} getSelectedClassesToBeBlurred={this.getSelectedClassesToBeBlurred} />
       <Camera />
       <Dashboard />
       <Footer />    

@@ -145,12 +145,14 @@ export default function PersistentDrawerLeft(props) {
                 </div>
                 <Divider />
                 <List>
-                    {['Remaining Statement Balance', 'Payment Due', 'Total Balance', 'Recent Transactions'].map((text, index) => (
+                    {['Remaining Statement Balance', 'Payment Due', 'Total Balance', 'Recent Transactions', 'Full Page'].map((text, index) => (
                         <ListItem button key={text}>
-                            {index === 0 &&  <ListItemIcon><Checkbox onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="StatementBalance" color={"primary"} id={`StatementBalance`} /><MonetizationOnIcon style={{height:`40px`}} /> </ListItemIcon>}
-                            {index === 1 && <ListItemIcon><Checkbox onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="PaymentDue"  color={"primary"} id={`PayDue`} /><AccessTimeIcon style={{height:`40px`}}/> </ListItemIcon>}
-                            {index === 2 && <ListItemIcon><Checkbox onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="TotalBalance"  color={"primary"} id={`TotalBalance`} /><MonetizationOnIcon style={{height:`40px`}}/> </ListItemIcon>}
-                            {index === 3 && <ListItemIcon><Checkbox onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="RecentTransactions"  color={"primary"} id={`RecentTxr`} /><ReceiptIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 0 &&  <ListItemIcon><Checkbox checked={props.selectedClasses.includes('StatementBalance')} onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="StatementBalance" color={"primary"} id={`StatementBalance`} /><MonetizationOnIcon style={{height:`40px`}} /> </ListItemIcon>}
+                            {index === 1 && <ListItemIcon><Checkbox checked={props.selectedClasses.includes('PaymentDue')} onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="PaymentDue"  color={"primary"} id={`PayDue`} /><AccessTimeIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 2 && <ListItemIcon><Checkbox checked={props.selectedClasses.includes('TotalBalance')} onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="TotalBalance"  color={"primary"} id={`TotalBalance`} /><MonetizationOnIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 3 && <ListItemIcon><Checkbox checked={props.selectedClasses.includes('RecentTransactions')} onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="RecentTransactions"  color={"primary"} id={`RecentTxr`} /><ReceiptIcon style={{height:`40px`}}/> </ListItemIcon>}
+                            {index === 4 && <ListItemIcon><Checkbox checked={props.selectedClasses.includes('FullPage')} onChange={(event) =>{props.getSelectedClassesToBeBlurred(event)} } value="FullPage"  color={"primary"} id={`FullPage`} /><ReceiptIcon style={{height:`40px`}}/> </ListItemIcon>}
+
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
