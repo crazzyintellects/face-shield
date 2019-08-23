@@ -1,5 +1,6 @@
 import * as faceapi from 'face-api.js';
 import $ from "jquery";
+import speakMsg from './voiceControl' ;
 
 const MODEL_URL = '/model';
 let globalFaceMatcher;
@@ -61,6 +62,7 @@ export const getFaceMatcher = async (userfaces) => {
 export const startCamera = async (videoPlayer,canvasElement) => {
 
     let context = canvasElement.getContext('2d');
+  
 
     if (!('mediaDevices' in navigator)) {
         navigator.mediaDevices = {};
@@ -101,6 +103,9 @@ export const startCamera = async (videoPlayer,canvasElement) => {
 //secureHomePage full page blur
 export const secureHomePage = async (videoPlayer,canvasElement,faceUserName,isLoggedIn,props) => {
     let scanInterval;
+
+    let alreadyWarn = false;
+
     if(isLoggedIn) {
 
         let context = await startCamera(videoPlayer, canvasElement);
@@ -113,6 +118,20 @@ export const secureHomePage = async (videoPlayer,canvasElement,faceUserName,isLo
             //debugger;
             if (allFacesDetection.length) {
                 //debugger;
+
+
+               //multiple faces warning
+
+               if((!alreadyWarn) && (allFacesDetection.length >  1)) {
+                  let warnMsg = `Hey ${faceUserName}, Someone is looking over your shoulder . This data is protected until they leave !`;
+                  speakMsg(warnMsg);
+                  alreadyWarn = true;
+                  $('html').addClass('blur-screen');
+
+               }else if (allFacesDetection.length >  1) {
+                $('html').addClass('blur-screen');
+               }
+
 
                 allFacesDetection.forEach(async item => {
                     const bestMatch = await globalFaceMatcher.findBestMatch(item.descriptor);
