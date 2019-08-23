@@ -171,7 +171,7 @@ export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
                loginCount = 0;
                unknownCount++;
 
-               if(unknownCount > 20) {
+               if(unknownCount > 12) {
                 scan.classList.remove('animate-scan');
                 scan.classList.add('scan-error');
                 unknownCount = 0;
@@ -182,6 +182,7 @@ export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
               console.log("loginCount : " + loginCount);
 
                if(loginCount === 7) {
+                clearInterval(scanForVerify);
                 scan.classList.remove('animate-scan');
                 scan.classList.remove('scan-error');
                 scan.classList.add('scan-success');
@@ -191,7 +192,7 @@ export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
                   track.stop();
                 });
 
-                clearInterval(scanForVerify);
+               
 
 
                }
