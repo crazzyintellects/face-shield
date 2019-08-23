@@ -182,7 +182,7 @@ const StatementBalance = (props) => {
                       </Button>
                     </CardActions>
                     <Typography variant="subtitle2" align='center' 
-                        style={{cursor: 'pointer', paddingBottom: '15px'}} color="black">
+                        style={{cursor: 'pointer', paddingBottom: '15px'}} >
                             Updates approx. 12pm ET each day.
                      </Typography>         
                     </Card>
