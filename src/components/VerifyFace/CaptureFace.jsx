@@ -181,7 +181,7 @@ const CaptureFace = (props) => {
               setLoading(false);
               setShowSaveBtn(false);
 
-            }, 1800);
+            }, 2000);
 
 
           }
@@ -218,7 +218,7 @@ const CaptureFace = (props) => {
             () => {
                 setshowSuccessMsg(true);
 
-            }, 2000);
+            }, 2500);
 
 
     };
@@ -304,7 +304,7 @@ const CaptureFace = (props) => {
                       <Slide direction="up" in={showSuccessMsg} mountOnEnter unmountOnExit>
                       <div onClick={redirectToHomePage}>
                            <Typography component="h5" variant="h5" align="center"  gutterBottom>
-                             Congrats !
+                            Happy and secure browsing ! 
                            </Typography>
                           
                        </div>

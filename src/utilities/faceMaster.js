@@ -239,7 +239,90 @@ export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
 
 
 
+//Specific area blur
+export const blurSpecificfields = async (videoPlayer,canvasElement,faceUserName , classNameList) => {
+
+  console.log("blur specific");
+  //clearInterval(secureHomePage(videoPlayer,canvasElement,faceUserName,false).scanForVerify);
+  
+  
+  let context = await startCamera(videoPlayer,canvasElement);
+
+
+  
+  setInterval(async () => {
+
+   context.drawImage(videoPlayer, 0, 0, 320, 247);
+      
+   let allFacesDetection = await faceapi.detectAllFaces(canvasElement).withFaceLandmarks().withFaceDescriptors();
+
+   if(allFacesDetection.length) {
+        
+      //multiple faces
+      if(allFacesDetection.length > 1){
+
+        if(classNameList.length) {
+          classNameList.forEach( classNm => {
+            $(classNm).addClass('blur-screen');
+
+          });
+        }
+
+      }
+        
+       allFacesDetection.forEach(async item => {
+
+           const bestMatch = await globalFaceMatcher.findBestMatch(item.descriptor);
+           let matchedUser = bestMatch.toString();
+           console.log("matched user blur specific : " + matchedUser);
+           
+           //Blur
+            let regUserName = new RegExp(faceUserName, 'g');
+            
+            if(matchedUser.match(/unknown/g)){
+              
+              if(classNameList.length) {
+                classNameList.forEach( classNm => {
+                  $(classNm).addClass('blur-screen');
+      
+                });
+              }
+
+            } else if (matchedUser.match(regUserName) && bestMatch._distance > 0.2) {
+             
+              if(classNameList.length) {
+                classNameList.forEach( classNm => {
+                  $(classNm).removeClass('blur-screen');
+      
+                });
+              }
+            }
 
 
 
-export default { loadFaceModels , getFaceMatcher  , startCamera , secureHomePage  , verifyLogin} ;
+   });
+
+   } else {
+    
+    if(classNameList.length) {
+      classNameList.forEach( classNm => {
+        $(`.classNm`).addClass('blur-screen');
+
+      });
+    }
+
+       
+   }
+
+  }, 60/1000);
+  
+ 
+
+};
+
+
+
+
+
+
+export default { loadFaceModels , getFaceMatcher  , startCamera , secureHomePage  , verifyLogin , blurSpecificfields} ;
