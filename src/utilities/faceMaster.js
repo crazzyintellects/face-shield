@@ -192,8 +192,12 @@ export const verifyLogin = async (videoPlayer,canvasElement,faceUserName) => {
                   track.stop();
                 });
 
-               
+                setTimeout(() => {
+                  window.location.href = '/Homepage';
+                },400);
 
+              
+               
 
                }
 

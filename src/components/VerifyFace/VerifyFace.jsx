@@ -74,10 +74,10 @@ class VerifyFace extends Component {
          let faceUserName = userFacesData[0].user;
          this.setState({userName : faceUserName});
          await getFaceMatcher(userFacesData);  
-         await verifyLogin(videoPlayer,canvasElement,faceUserName);
+          await verifyLogin(videoPlayer,canvasElement,faceUserName);
+        
   
-  
-      },800);
+      },100);
 
     }
      
