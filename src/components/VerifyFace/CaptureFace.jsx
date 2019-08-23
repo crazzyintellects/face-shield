@@ -17,6 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
 import { withRouter } from 'react-router-dom';
 import React from 'react';
+//import { async } from 'q';
 
 
 
@@ -163,32 +164,61 @@ const CaptureFace = (props) => {
     };
 
     const savePicturesFn = async (e) => {
-        setLoading(true);
+       
+        if (!loading) {
 
-        setTimeout(
-            async () => {
+            setSuccess(false);
+            setLoading(true);
+            
+            setTimeout(async () => {
                 user = document.getElementById("username").value;
 
                 await getFaceDescriptions();
+             let imageGallery = document.querySelector('#imageGallery');
+            imageGallery.style.display = 'none';
+            console.log("show success");
+              setSuccess(true);
+              setLoading(false);
+              setShowSaveBtn(false);
 
-                if (!loading) {
+            }, 1800);
 
 
-                    let imageGallery = document.querySelector('#imageGallery');
-                    imageGallery.style.display = 'none';
-                    console.log("show success");
-                    setSuccess(true);
-                    setLoading(false);
-                    setShowSaveBtn(false);
-                }
+          }
+       
+       
+       
+       
+       
+       
+       
+        // setLoading(true);
 
-            }, 2000);
+        // setTimeout(
+        //     async () => {
+        //         user = document.getElementById("username").value;
 
-        setTimeout(
+        //         await getFaceDescriptions();
+
+        //         if (!loading) {
+
+
+        //             let imageGallery = document.querySelector('#imageGallery');
+        //             imageGallery.style.display = 'none';
+        //             console.log("show success");
+        //             setSuccess(true);
+        //             setLoading(false);
+        //             setShowSaveBtn(false);
+        //         }
+
+        //     }, 2000);
+
+        
+            setTimeout(
             () => {
                 setshowSuccessMsg(true);
 
-            }, 3000);
+            }, 2000);
 
 
     };
