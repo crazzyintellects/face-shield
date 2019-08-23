@@ -6,6 +6,7 @@ import Camera from '../../components/VerifyFace/Camera';
 import {getFaceMatcher} from '../../utilities/faceMaster';
 import {secureHomePage}  from '../../utilities/faceMaster';
 import Dashboard from '../../components/HeroSection/Dashboard';
+import $ from "jquery";
 
 const headerItems = [
   'Home',
@@ -23,7 +24,9 @@ class HomePage extends Component {
 
   state = {
     faceUserName : "",
-      classesToBeBlurred:[]
+      classesToBeBlurred:[],
+      isLoggedIn: true,
+      clearScanTimeout: 0
   };
 
   componentDidMount = () => {
@@ -39,14 +42,39 @@ class HomePage extends Component {
        
        this.setState({
         faceUserName: faceUserName,
+           clearScanTimeout:  await secureHomePage(videoPlayer,canvasElement,faceUserName,this.state.isLoggedIn,this.props)
        });
-       await secureHomePage(videoPlayer,canvasElement,faceUserName);
+
 
 
     },800);
 
 }
 
+    logout=(props)=>{
+        let videoPlayer = document.querySelector('#player');
+        let canvasElement = document.querySelector('#canvas');
+        let userFacesData = JSON.parse(localStorage.getItem("userFacesData")) || [];
+        let faceUserName = userFacesData[0].user;
+
+
+        $('html').removeClass('blur-screen');
+        if(videoPlayer && videoPlayer.srcObject.getVideoTracks().length > 0) {
+            videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
+                track.stop();
+            });
+
+        }
+        clearInterval(this.state.clearScanTimeout);
+        props.history.push(`/`);
+        $('html').removeClass('blur-screen');
+      /*this.setState({
+          isLoggedIn:false,
+      }, ()=>{
+
+           secureHomePage(videoPlayer,canvasElement,faceUserName,this.state.isLoggedIn,props);
+      })*/
+    }
 
 getSelectedClassesToBeBlurred=(event)=>{
    const classesToBeBlurred = [...this.state.classesToBeBlurred];
@@ -66,7 +94,7 @@ render ()
  
   return (
     <div className="homepage">
-      <Header headerItems={headerItems} buttonName={buttonName} />
+      <Header headerItems={headerItems} logout={this.logout} buttonName={buttonName} />
       <Drawer getSelectedClassesToBeBlurred={this.getSelectedClassesToBeBlurred} />
       <Camera />
       <Dashboard />

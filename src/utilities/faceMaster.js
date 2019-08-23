@@ -95,45 +95,65 @@ export const startCamera = async (videoPlayer,canvasElement) => {
 
         return context;
 };
+/*const killCamera =()=>{
 
+}*/
 //secureHomePage full page blur
-export const secureHomePage = async (videoPlayer,canvasElement,faceUserName) => {
+export const secureHomePage = async (videoPlayer,canvasElement,faceUserName,isLoggedIn,props) => {
+    let scanInterval;
+    if(isLoggedIn) {
 
-   let context = await startCamera(videoPlayer,canvasElement);
-   
-   setInterval(async () => {
+        let context = await startCamera(videoPlayer, canvasElement);
 
-    context.drawImage(videoPlayer, 0, 0, 320, 247);
-       
-    let allFacesDetection = await faceapi.detectAllFaces(canvasElement).withFaceLandmarks().withFaceDescriptors();
+         scanInterval= setInterval(async () => {
 
-    if(allFacesDetection.length) {
-         
-        allFacesDetection.forEach(async item => {
-            const bestMatch = await globalFaceMatcher.findBestMatch(item.descriptor);
-            let matchedUser = bestMatch.toString();
-            console.log("matched user : " + matchedUser);
-            
-            //Blur
-             let regUserName = new RegExp(faceUserName, 'g');
-             
-             if(matchedUser.match(/unknown/g)){
-                $('html').addClass('blur-screen');
-             } else if (matchedUser.match(regUserName) && bestMatch._distance > 0.2) {
+            context.drawImage(videoPlayer, 0, 0, 320, 247);
+
+            let allFacesDetection = await faceapi.detectAllFaces(canvasElement).withFaceLandmarks().withFaceDescriptors();
+            //debugger;
+            if (allFacesDetection.length) {
+                //debugger;
+
+                allFacesDetection.forEach(async item => {
+                    const bestMatch = await globalFaceMatcher.findBestMatch(item.descriptor);
+                    let matchedUser = bestMatch.toString();
+                    console.log("matched user : " + matchedUser);
+
+                    //Blur
+                    let regUserName = new RegExp(faceUserName, 'g');
+
+                    if (matchedUser.match(/unknown/g)) {
+                        $('html').addClass('blur-screen');
+                    } else if (matchedUser.match(regUserName) && bestMatch._distance > 0.2) {
+                        $('html').removeClass('blur-screen');
+                    }
+
+
+                });
+
+            } else if(!isLoggedIn){
+                clearInterval(scanInterval)
                 $('html').removeClass('blur-screen');
-             }
+            }
+            else {
+                $('html').addClass('blur-screen');
+            }
 
+        }, 60 / 1000);
+    }else{
+        $('html').removeClass('blur-screen');
+        let videoPlayer = document.querySelector('#player');
+        if(videoPlayer && videoPlayer.srcObject.getVideoTracks().length > 0) {
+            videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
+                track.stop();
+            });
 
-
-    });
-
-    } else {
-        $('html').addClass('blur-screen');
+        }
+        clearInterval(scanInterval)
+        props.history.push(`/`);
+        $('html').removeClass('blur-screen');
     }
-
-   }, 60/1000);
-   
-  
+  return scanInterval;
 
 };
 
